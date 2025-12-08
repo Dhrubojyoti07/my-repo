@@ -1,0 +1,98 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
+h1{
+    text-align: center;
+    letter-spacing: 4px;
+    font-size: 50px;
+    animation:colour 5s linear infinite;
+}
+h2{
+    text-align: center;
+    color: red;
+}
+h3{
+     text-align: center;
+     color: yellow;
+     animation:text 3s linear infinite;
+}
+.game{
+    display:flex;
+    justify-content: center;
+}
+.btn{
+    border-radius: 20%;
+    border: 10px solid black;
+    width: 10.25rem;
+    height:10.25rem;
+    margin: 1.5rem;
+    cursor: pointer;
+}
+.yellow{
+    background-color: yellow;
+}
+.green{
+    background-color: green;
+}
+.blue{
+    background-color: blue;
+}
+.red{
+    background-color: red;
+}
+.white{
+    background-color: white;
+}
+.main{
+    border-top:16px solid blue;
+    border-left:16px solid red ;
+    border-right: 16px solid yellow;
+    border-bottom:16px solid green ;
+    width: fit-content;
+    background: #232323;
+    animation:spin 5s linear infinite;
+}
+@keyframes spin{
+    0%{border-top:16px solid blue;
+    border-left:16px solid red ;
+    border-right: 16px solid yellow;
+    border-bottom:16px solid green ;
+    
+}
+    25%{border-top:16px solid red;
+    border-left:16px solid green ;
+    border-right: 16px solid blue;
+    border-bottom:16px solid yellow ;}
+    50%{border-top:16px solid green;
+    border-left:16px solid yellow ;
+    border-right: 16px solid red;
+    border-bottom:16px solid blue ;}
+    75%{border-top:16px solid yellow;
+    border-left:16px solid blue ;
+    border-right: 16px solid green;
+    border-bottom:16px solid red ;}
+    100%{border-top:16px solid blue;
+    border-left:16px solid red ;
+    border-right: 16px solid yellow;
+    border-bottom:16px solid green ;}
+}
+@keyframes colour{
+    0%{
+        color: red;
+    }
+    25%{
+        color: green;
+    }
+    50%{
+        color: blue;
+    }
+    75%{
+        color: yellow;
+    }
+    100%{
+        color: red;
+    }
+}

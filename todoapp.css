@@ -1,0 +1,21 @@
+
+h1{
+    text-align: center;
+    letter-spacing: 5px;
+}
+.hed{
+    background-color: aqua;
+    padding: 15px;
+    position: sticky;
+}
+h2{
+    text-align:center;
+}
+.listing{
+    background-color: wheat;
+    overflow: auto;
+}
+.bts{
+    padding: 2px;
+    margin:5px;
+}
