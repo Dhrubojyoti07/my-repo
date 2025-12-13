@@ -6,17 +6,14 @@ button.addEventListener("click",function(){
     list.innerText=inp.value;
     let bt=document.createElement("button");
     bt.classList.add("bts");
-    bt.innerHTML='<i class="fa-solid fa-trash"></i>';
+    bt.innerHTML='del';
+    
     list.appendChild(bt);
     ul.appendChild(list);
     inp.value="";
+    bt.addEventListener("click",function(event){
+    console.dir(event.target.parentElement);
+    event.target.parentElement.remove();
 });
-ul.addEventListener("click",function(event){
-    if(event.target.nodeName=="BUTTON"){
-        let del = event.target.parentElement;
-        console.dir(del);
-        del.remove();
-}});
 
-    
-        
+});
