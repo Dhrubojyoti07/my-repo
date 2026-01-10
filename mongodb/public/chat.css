@@ -1,0 +1,106 @@
+/* General page styling */
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f6fa;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+}
+span{
+    display: flex;
+    justify-content: space-between;
+}
+/* App header */
+h1 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+/* User avatar circle */
+.u {
+    margin-top: 20px;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background: #3498db;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+/* Chat container */
+.chats {
+  max-height: 400px;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+}
+
+/* Received messages */
+.received {
+  background: #ecf0f1;
+  padding: 8px 12px;
+  margin: 6px 0;
+  border-radius: 12px;
+  max-width: 30%;
+  word-wrap: break-word;
+}
+
+/* Sent messages */
+.sent {
+  background: #3498db;
+  color: #fff;
+  padding: 8px 12px;
+  margin: 6px 0;
+  border-radius: 12px;
+  max-width: 30%;
+  word-wrap: break-word;
+  margin-left: auto; /* push to right */
+}
+
+/* Input + button */
+input[name="msg"] {
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+}
+
+button {
+  background: #3498db;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+button:hover {
+  background: #2980b9;
+}
+
+/* Scrollbar styling */
+.chats::-webkit-scrollbar {
+  width: 6px;
+}
+.chats::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 3px;
+}
+.time {
+  display: block;
+  font-size: 0.75em;       /* smaller than message text */
+  color: #777;             /* subtle gray */
+  margin-top: 4px;
+  text-align: right;       /* align to the right inside bubble */
+  opacity: 0.8;
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <h1>Welcome to our new server</h1>
+    <h3>we have currently <%=data.length%> users using our server</h3>
+    <div>
+        <form action="/new"><button>add user</button></form>
+        <form action="/edit"><button>edit user</button></form>
+        <form action="/delete"><button>delete user</button></form>
+    </div>
+    
+    <table border="2px">
+    <tr>
+        <th>userID</th>
+        <th>username</th>
+        <th>email ID</th>
+    </tr>
+    <%for(d of data){%>
+        <tr>
+            <td><%=d.userID%></td>
+            <td><%=d.username%></td>
+            <td><%=d.email%></td>
+        </tr>
+    <%}%>
+    </table>
+</body>
+</html>

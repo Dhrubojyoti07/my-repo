@@ -1,0 +1,11 @@
+table{
+    
+    margin-left: 25%;
+}
+div{
+    display: flex;
+}
+form{
+    padding: 2px;
+    margin: 2px;
+}

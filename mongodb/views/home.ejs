@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=dat.username%> page</title>
+    <link rel="stylesheet" href="/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+</head>
+<body>
+    <h1>WHISPER CHAT</h1>
+    <h3>Welcome <%=dat.username%></h3>
+    <div class="k"><h4>Chats</h4><form action="/add/new/<%=dat.username%>"><button><i class="fa-solid fa-plus"></i></button></form></div>
+    <div class="chats">
+        <%for(c of chat){%>
+            <div class="us"> <i class="fa-solid fa-circle-user"></i><a href="/chats/<%=c.from%>/<%=c.to%>"><%=c.from%></a></div>
+        <%}%>
+    </div>
+    <hr>
+    <script>
+</script>
+</body>
+</html>
