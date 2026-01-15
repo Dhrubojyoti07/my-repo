@@ -1,87 +1,155 @@
-/* Reset some defaults */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+
+:root {
+  --bg-deep: #020617;
+  --glass: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --accent: #38bdf8;
+  --accent-glow: rgba(56, 189, 248, 0.3);
+  --text-main: #f8fafc;
+  --text-dim: #94a3b8;
+}
+
+/* --- Global Reset --- */
+* {
+  box-sizing: border-box;
+  /* Fixes the horizontal overflow seen in your screenshot */
+  overflow-wrap: anywhere; 
+}
+
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-deep);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  display: flex;
+  justify-content: center; /* Centers the content on desktop */
+  background-image: radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.08) 0px, transparent 50%);
 }
-.k{
-    display: flex;
-    justify-content: space-between;
+
+/* --- Main Glass Container --- */
+#bdy {
+  width: 100%;
+  max-width: 500px; /* Gives it a clean mobile-app look */
+  min-height: 100vh;
+  padding: 40px 24px;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border-left: 1px solid var(--glass-border);
+  border-right: 1px solid var(--glass-border);
+  box-shadow: 0 0 50px rgba(0,0,0,0.5);
 }
-/* Page header */
+
+/* --- Header Section --- */
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
 h1 {
-    text-align: center;
-    background-color: #4a90e2;
-    color: white;
-    padding: 15px;
-    margin: 0;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--accent);
+  margin: 0;
+  letter-spacing: 1px;
 }
 
-/* Welcome message */
+.u-avatar {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--accent), #1d4ed8);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: white;
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
 h3 {
-    text-align: center;
-    margin-top: 10px;
-    font-weight: normal;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--text-dim);
+  margin: 0 0 30px 0;
 }
 
-/* Section headings */
+/* --- Friends Bar --- */
+.k {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
 h4 {
-    margin: 20px 0 10px;
-    color: #4a90e2;
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  color: var(--accent);
 }
 
-/* New chat button */
 form button {
-    background-color: #4a90e2;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding-bottom: 2px;
-    margin-right:10px ;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, var(--accent), #1d4ed8);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 10px 20px -5px var(--accent-glow);
 }
 
 form button:hover {
-    background-color: #357ab8;
+  transform: scale(1.1) rotate(90deg);
 }
 
-/* Chat list container */
+/* --- Chat List Items --- */
 .chats {
-    margin-top: 15px;
-    padding: 10px;
-    background: white;
-    border-radius: 6px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-/* Chat links */
-.chats a {
-    display: block;
-    padding: 8px;
-    text-decoration: none;
-    color: #333;
-    border-radius: 4px;
-    transition: background-color 0.2s ease;
+.us {
+  display: flex;
+  align-items: center;
+  padding: 18px 20px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  transition: 0.3s ease;
 }
 
-.chats a:hover {
-    background-color: #f0f8ff;
-    color: #4a90e2;
+.us:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(8px);
+  border-color: var(--accent);
 }
 
-/* Horizontal rule styling */
+.us i {
+  margin-right: 15px;
+  font-size: 1.3rem;
+  color: var(--accent);
+}
+
+.us a {
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 600;
+  flex: 1;
+}
+
 hr {
-    border: none;
-    border-top: 1px solid #ddd;
-    margin: 10px 0;
-}
-.us{
-    display: flex;
-}
-i{
-    margin-top:8.5px ;
+  border: none;
+  border-top: 1px solid var(--glass-border);
+  margin-top: 40px;
+  opacity: 0.2;
 }

@@ -15,12 +15,12 @@ const chatBox = document.querySelectorAll(".box");
  let chit;   
 sent.addEventListener("click",(event)=>{
   console.log("button was clicked");
-    let d= document.createElement("div");
-    d.innerHTML= inp.value;
+    let d=document.createElement("div");
+    d.innerHTML=inp.value;
     console.log(inp.value);
-     chats.appendChild(d);
+    chats.appendChild(d);
     try {
-          fetch('/addchat', {
+         fetch('/addchat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ text: inp.value })
@@ -28,17 +28,17 @@ sent.addEventListener("click",(event)=>{
       } catch (err) {
         console.error('Error saving to DB:', err);
       }
-       location.reload();
+      location.reload();
 });
 inp.addEventListener("keydown",(event)=>{
   console.log(event.key);
   if(event.key=="Enter"){  console.log("button was clicked");
-    let d= document.createElement("div");
-    d.innerHTML= inp.value;
+    let d=document.createElement("div");
+    d.innerHTML=inp.value;
     console.log(inp.value);
-     chats.appendChild(d);
-     try {
-          fetch('/addchat', {
+    chats.appendChild(d);
+    try {
+         fetch('/addchat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ text: inp.value })
@@ -46,13 +46,13 @@ inp.addEventListener("keydown",(event)=>{
       } catch (err) {
         console.error('Error saving to DB:', err);
       }
-       location.reload();
+      location.reload();
     }
 });
     // Show custom menu on right-click
     chatBox.forEach(box => {
   box.addEventListener("contextmenu", (event) => {
-    chit= event.target.closest(".box").firstChild.textContent;
+    chit=event.target.closest(".box").firstChild.textContent;
     event.preventDefault();
     menu.style.display = "block";
     menu.style.top = event.pageY + "px";

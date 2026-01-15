@@ -9,22 +9,50 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_circle_right" />
 </head>
 <body>
-    <span><h1>WHISPER NET</h1><div class="u"><%=t.substring(0,1).toUpperCase()%></div></span>                                            
+    <div id="editchat">
+        <input type="text" placeholder="enter chat" id="eddit"><br>
+        <button id="edit">edit</button>
+    </div>
+    <div id="deletechat">
+        <p>Are you sure want to delete this chat</p>
+        <button id="cancel">cancel</button>
+        <button id="delete">delete</button>
+    </div>
+    <div id="bdy">
+        <span><h1>WHISPER NET</h1><div class="u"><%=t.substring(0,1).toUpperCase()%></div></span>                                            
     <h3><i class="fa-solid fa-circle-user"></i><%=fr%></h3>
     <div class="chats">
         <%for(d of dat){%>
             <%if(d.msg!=''){%>
                     <%if(d.from==fr){%>
-                        <div class="received"><%=d.msg%> <div class="time"><%=d.created_at%></div></div>
+                         <%if(d.updated_at){%>
+                        <div class="received"><%=d.msg%> <div class="time">(edited)<%=d.updated_at.toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })%></div></div>
+                        <%}else{%>
+                            <div class="received"><%=d.msg%> <div class="time"><%=d.created_at.toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })%></div></div>
+                            <%}%>
                     <%}else{%>
-                        <div class="sent"><%=d.msg%><div class="time"><%=d.created_at%></div></div>
+                        <%if(d.updated_at){%>
+                        <div class="sent box"><%=d.msg%> <div class="time">(edited)<%=d.updated_at.toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })%></div></div>
+                        <%}else{%>
+                            <div class="sent box"><%=d.msg%> <div class="time"><%=d.created_at.toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })%></div></div>
+                            <%}%>
                     <%}%>
         <%}%>
     <%}%>
     </div>
-    
-    <input type="text" placeholder="enter message" name="msg"><button><span class="material-symbols-outlined">arrow_circle_right</span></button>
-    <script src="/chat.js">
+    <div id="customMenu">
+    <button id="editBtn">Edit Chat</button>
+    <button id="deleteBtn">Delete Chat</button>
+  </div>
+
+    <div class="input-wrapper" style="display: flex;"><input type="text" placeholder="enter message" name="msg" id="msg"><button id="sent">
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button></div>
+    </div>
+        <script src="/chat.js">
     </script>
 </body>
 </html>

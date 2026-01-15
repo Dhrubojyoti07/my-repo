@@ -1,33 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
 
-div{
-    position: absolute;
-    top: 30%;
-    left: 40%;
-    border: 2px solid black;
-    width: 13.5rem;
-    padding: 5px;
-    background-color: aliceblue;
-}
-h3{
-    padding: 5px;
+:root {
+  --bg-deep: #020617;
+  --glass: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --accent: #38bdf8;
+  --accent-glow: rgba(56, 189, 248, 0.3);
+  --text-main: #f8fafc;
+  --text-dim: #94a3b8;
 }
 
-input{
-    padding: 5px;
-    margin: 5px 15px;
-    border-radius: 15px;
+/* --- Global Reset & 3D Environment --- */
+* {
+  box-sizing: border-box;
 }
-button{
-    width:200px;
-    border-radius: 15px;
-    padding: 5px;
-    margin: 5px;
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--bg-deep);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  perspective: 1200px; /* Essential for 3D depth */
 }
-h1{
-    margin-left: 25px;
+
+/* --- Animated Mesh Background --- */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: 
+    radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.1) 0%, transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(29, 78, 216, 0.1) 0%, transparent 40%);
 }
-a{
-    text-decoration: none;
-    color: black;
-    margin: 15px 5px;
+
+/* --- Page Heading --- */
+body > h1 {
+  color: var(--text-main);
+  font-weight: 800;
+  letter-spacing: 4px;
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+  transform: translateZ(50px);
+  background: linear-gradient(90deg, #fff, var(--accent), #fff);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+@keyframes shimmer { to { background-position: 200% center; } }
+
+/* --- Main Glass Card --- */
+.login-card {
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  padding: 40px;
+  border-radius: 30px;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+  transform: rotateX(2deg); /* Subtle 3D tilt */
+  transition: transform 0.5s ease;
+}
+
+.login-card:hover {
+  transform: rotateX(0deg) translateZ(10px);
+}
+
+/* --- Form Heading --- */
+form h1 {
+  margin-bottom: 25px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* --- Input Fields --- */
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 14px 20px;
+  margin: 12px 0;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  border-radius: 15px;
+  color: white;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  border-color: var(--accent);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+/* --- Error Message --- */
+.error {
+  color: #fb7185;
+  font-size: 0.8rem;
+  margin: 5px 0;
+  min-height: 20px;
+}
+
+/* --- Submit Button --- */
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 15px;
+  background: linear-gradient(135deg, var(--accent), #1d4ed8);
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 20px -5px var(--accent-glow);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+button:hover {
+  transform: translateY(-3px) scale(1.02);
+  filter: brightness(1.1);
+  box-shadow: 0 15px 30px var(--accent-glow);
+}
+
+/* --- Links --- */
+a {
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 0.85rem;
+  color: var(--accent);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  opacity: 0.8;
+}
+
+a:hover {
+  opacity: 1;
+  text-shadow: 0 0 10px var(--accent-glow);
 }

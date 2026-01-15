@@ -2,7 +2,6 @@ const exp=require("express");
 const bodyParser = require('body-parser');
 const app=exp();
 const path=require("path");
-const port=6969;
 const mongoose=require("mongoose");
 const mo=require("method-override");
 const Chat=require("./models/chat.js");
@@ -14,17 +13,17 @@ app.use(mo("_method"));
 app.use(exp.urlencoded({extended:true}));
 app.use(bodyParser.json());
 const con2=mongoose.createConnection('mongodb://127.0.0.1:27017/user');
-mongoose.connect('mongodb://127.0.0.1:27017/user');
-  app.listen(port,()=>{
-    console.log("server is listerning on port 6969");
+mongoose.connect('mongodb://monogoipaddress/user');
+  app.listen("port number", "IPV4", () => {
+  console.log("Server running on http://IPV4:portnumber");
+});
+
+  let errr="";
+  app.get("/",(req,res)=>{
+    res.redirect("/login");
   });
-  function date(){
-    let istTime = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
-    istTime=istTime.trim().substring(10,16).concat(istTime.trim().substring(19));
-    return istTime;
-  }
   app.get("/login",(req,res)=>{
-    res.render("login.ejs");
+    res.render("login.ejs",{er:errr});
   });
   app.get("/signup",(req,res)=>{
     res.render("signup.ejs");
@@ -39,7 +38,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/user');
     }
   );
   user1.save();
-  res.redirect("/login")
+  res.redirect("/login");
     
   });
   let re,d;
@@ -48,10 +47,13 @@ mongoose.connect('mongodb://127.0.0.1:27017/user');
     User.find({email:email}).then((data)=>{
         if(password===data[0].password)
         {
+            errr="";
             res.redirect(`/home/${data[0].username}`);
-    }
-            else
-            res.send("wrong email or password");
+        }
+            else{
+                errr="wrong email id or password";
+                res.redirect(`/login`);
+            }
             });
         }
   );
@@ -72,19 +74,15 @@ mongoose.connect('mongodb://127.0.0.1:27017/user');
     res.render("newchat.ejs",{user});
   });
   app.post("/add/:to",(req,res)=>{
-    console.log(re);
     let {to}=req.params;
     let {username}=req.body;
     User.find({username:username}).then((users)=>{
-      console.log(users);
-      let datee=date();
-      console.log(datee);
       let chat1=new Chat(
     {
         from: username,
         to:to ,
         msg:"",
-        created_at: datee,
+        created_at: new Date(),
     }
   );
   chat1.save();
@@ -96,46 +94,47 @@ mongoose.connect('mongodb://127.0.0.1:27017/user');
         let {from,to}=await req.params;
         f=from;
         t=to;
-        Chat.find({$and: [
+        await Chat.find({$and: [
             {from:from},
             {to:to}
-        ]}).then((data1)=>{
+        ]}).then(async(data1)=>{
             data1.classlist="received";
-            Chat.find({$and: [
+            await Chat.find({$and: [
             {from:to},
             {to:from}
-            ]}).then((data2)=>{
+            ]}).then(async(data2)=>{
                 data2.classlist="sent";
-                data=data1.concat(data2);
-                data.sort((a,b)=>a.created_at-b.created_at);
-                console.log(data);
-                res.render("chat.ejs",{dat:data,fr:from,t:to});
-            })
+                data=await data1.concat(data2);
+                await data.sort((a,b)=>a.created_at-b.created_at);
+                await res.render("chat.ejs",{dat:data,fr:from,t:to});
+            });
         });
   });
   app.post("/addchat",async(req,res)=>{
-    console.log(req.body.text);
-    console.log(f,t);
-    let datee=date();
-      console.log(datee);
     let chat1=await new Chat(
     {
         from: t,
         to: f,
         msg: req.body.text,
-        created_at: datee,
+        created_at: new Date(),
         classlist:"sent",
     }
   );
   await chat1.save();
-
+  console.log(chat1.updated_at);
   });
-//   let chat1=new Chat(
-//     {
-//         from: 'kiit',
-//         to: 'dhrubo',
-//         msg: 'tomorrow you have a class',
-//         created_at: new Date(),
-//     }
-//   );
-//   chat1.save();
+  app.patch("/change",(req,res)=>{
+    let text=req.body.text.trim();
+    let msg=req.body.msg.trim();
+    console.log(text,msg,f,t);
+    Chat.findOneAndUpdate({msg:msg,from:t,to:f,},{msg:text,updated_at:new Date()}).then((data)=>{
+        console.log(data);
+    }).catch((err)=>{console.log(err);});
+  });
+  app.delete("/delete",(req,res)=>{
+    let text=req.body.text.trim();
+    console.log(text);
+    Chat.findOneAndDelete({msg:text,from:t,to:f}).then((data)=>{
+        console.log(data);
+    }).catch((err)=>{console.log(err);});
+  });
